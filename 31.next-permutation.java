@@ -53,31 +53,43 @@ import static java.util.Arrays.sort;
 class Solution {
     public void nextPermutation(int[] nums) {
 //    	int right = nums.length - 1;
-		for (int left = nums.length - 1; left >= 0; left--)
+		if (nums.length == 1) {
+			return;
+		}
+
+		int left, right;
+		for (left = nums.length - 2; left >= 0; left--)
 		{
-			int pos = nums.length - 1;
-			int right = nums.length - 1;
-			boolean flag = false;
-			int maxV = Integer.MAX_VALUE;
-			for (right = nums.length - 1; right > left; right--) {
-				if (nums[right] > nums[left] && nums[right] <= maxV) {
-					pos = right;
-					flag = true;
-					maxV = nums[pos];
-				}
-			}
-			if (flag)
-			{
-				swap(nums, left, pos);
-				if (left != nums.length - 1)
-				{
-					sort(nums, left + 1, nums.length);
-				}
-				return;
+			right = left + 1;
+			if (nums[left] < nums[right]) {
+				break;
 			}
 		}
-		sort(nums);
+
+		if (left + 1 == nums.length - 1) {
+			swap(nums, left, left + 1);
+			return;
+		}
+
+		for (right = left + 1; right < nums.length - 1; right++) {
+			if (nums[left] < nums[right] && nums[left] >= nums[right + 1]) {
+				swap(nums, left, right);
+			}
+		}
+		reverseOrder(nums, left + 1, nums.length - 1);
     }
+
+	private void reverseOrder(int[] nums, int l, int r)
+	{
+		while (l != r) {
+			swap(nums, l, r);
+			if (l + 1 == r) {
+				break;
+			}
+			l++;
+			r--;
+		}
+	}
 
 	private void swap(int[] nums, int left, int right)
 	{
@@ -89,9 +101,15 @@ class Solution {
 	public static void main(String[] args)
 	{
 		Solution a = new Solution();
-		int[] input = new int[] {2, 3, 1};
+		int[] input = new int[] {3, 2, 1};
 		a.nextPermutation(input);
 		System.out.println(a);
+//		int i;
+//		for (i = 5; i > 0 ; i--)
+//		{
+//			System.out.println(i);
+//		}
+//		System.out.println(i);
 //		Arrays.stream(input).forEach(i -> {
 //			System.out.println();
 //				}

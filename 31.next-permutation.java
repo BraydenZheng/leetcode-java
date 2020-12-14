@@ -57,13 +57,19 @@ class Solution {
 			return;
 		}
 
-		int left, right;
-		for (left = nums.length - 2; left >= 0; left--)
+		int left = nums.length - 2;
+		int right;
+		while (left >= 0)
 		{
 			right = left + 1;
 			if (nums[left] < nums[right]) {
 				break;
 			}
+			left --;
+		}
+		if (left < 0) {
+			reverseOrder(nums, 0, nums.length - 1);
+			return;
 		}
 
 		if (left + 1 == nums.length - 1) {
@@ -76,6 +82,10 @@ class Solution {
 				swap(nums, left, right);
 			}
 		}
+//		if (right + 1 == nums.length) {
+//			swap(nums, left, nums.length - 1);
+//		}
+
 		reverseOrder(nums, left + 1, nums.length - 1);
     }
 
@@ -101,7 +111,8 @@ class Solution {
 	public static void main(String[] args)
 	{
 		Solution a = new Solution();
-		int[] input = new int[] {3, 2, 1};
+//		int[] input = new int[] {2, 3, 1};
+		int[] input = new int[] {1, 3, 2};
 		a.nextPermutation(input);
 		System.out.println(a);
 //		int i;

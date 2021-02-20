@@ -53,40 +53,55 @@ import static java.util.Arrays.sort;
 class Solution {
     public void nextPermutation(int[] nums) {
 //    	int right = nums.length - 1;
+		final int end = nums.length - 1;
+		int right = end;
+		int left = end;
+
 		if (nums.length == 1) {
 			return;
 		}
 
-		int left = nums.length - 2;
-		int right;
-		while (left >= 0)
-		{
-			right = left + 1;
-			if (nums[left] < nums[right]) {
+		while (right > 0) {
+			if (nums[right - 1] < nums[right]) {
+				right--;
 				break;
 			}
-			left --;
+			right--;
 		}
-		if (left < 0) {
-			reverseOrder(nums, 0, nums.length - 1);
+
+		//if the whole list is reversed
+		if (right == -1) {
+			reverseOrder(nums, 0, end);
 			return;
 		}
 
-		if (left + 1 == nums.length - 1) {
-			swap(nums, left, left + 1);
-			return;
+		left = right + 1;
+
+		while (left < end)
+		{
+			if (nums[right] >= nums[left + 1] && nums[right] < nums[left])
+			{
+				swap(nums, right, left);
+				break;
+			}
+			left++;
 		}
 
-		for (right = left + 1; right < nums.length - 1; right++) {
-			if (nums[left] < nums[right] && nums[left] >= nums[right + 1]) {
-				swap(nums, left, right);
+		//last pair
+		if (left == end)
+		{
+			if (nums[right] < nums[left])
+			{
+				swap(nums, right, left);
+			}
+			else
+			{
+				reverseOrder(nums, 0, end);
+				return;
 			}
 		}
-//		if (right + 1 == nums.length) {
-//			swap(nums, left, nums.length - 1);
-//		}
 
-		reverseOrder(nums, left + 1, nums.length - 1);
+		reverseOrder(nums, right + 1, nums.length - 1);
     }
 
 	private void reverseOrder(int[] nums, int l, int r)
@@ -112,7 +127,8 @@ class Solution {
 	{
 		Solution a = new Solution();
 //		int[] input = new int[] {2, 3, 1};
-		int[] input = new int[] {1, 3, 2};
+//		int[] input = new int[] {1, 2, 3};
+		int[] input = new int[] {1, 5, 1};
 		a.nextPermutation(input);
 		System.out.println(a);
 //		int i;

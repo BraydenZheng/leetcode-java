@@ -1,5 +1,3 @@
-import java.util.Arrays;
-
 /*
  * @lc app=leetcode id=35 lang=java
  *
@@ -84,7 +82,7 @@ class searchInsert {
     }
 
     public static void main(String[] args) {
-        Solution solution = new Solution();
+        BrickHit solution = new BrickHit();
         int[] nums = {1, 3, 5, 6};
 //        int result = solution.searchInsert(nums, 4);
 //        System.out.println(result);

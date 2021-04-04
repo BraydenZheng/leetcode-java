@@ -50,7 +50,7 @@ import static java.util.Arrays.sort;
  * 
  * 
  */
-class Solution {
+class NextPermutation{
     public void nextPermutation(int[] nums) {
 //    	int right = nums.length - 1;
 		final int end = nums.length - 1;
@@ -125,7 +125,7 @@ class Solution {
 
 	public static void main(String[] args)
 	{
-		Solution a = new Solution();
+		NextPermutation a = new NextPermutation();
 //		int[] input = new int[] {2, 3, 1};
 //		int[] input = new int[] {1, 2, 3};
 		int[] input = new int[] {1, 5, 1};
